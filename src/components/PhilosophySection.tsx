@@ -31,51 +31,51 @@ const PhilosophySection = () => {
     <section
       ref={ref}
       id="philosophy"
-      className="py-24 md:py-32 lg:py-40 bg-card"
+      className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card"
     >
       <div className="container-wide section-padding">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+          className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center"
         >
           {/* Content */}
           <div>
             <motion.span
               variants={itemVariants}
-              className="inline-block text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4"
+              className="inline-block text-xs sm:text-sm font-medium tracking-wide uppercase text-muted-foreground mb-3 md:mb-4"
             >
               {t.philosophy.label}
             </motion.span>
 
             <motion.h2
               variants={itemVariants}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-6"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-4 md:mb-6"
             >
               {t.philosophy.title}
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="text-lg text-muted-foreground mb-8 leading-relaxed"
+              className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed"
             >
               {t.philosophy.description}
             </motion.p>
 
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="space-y-4 md:space-y-6">
               {t.philosophy.points.map((item, index) => (
-                <div key={index} className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                    <span className="text-sm font-semibold text-secondary-foreground">
+                <div key={index} className="flex gap-3 md:gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center">
+                    <span className="text-xs md:text-sm font-semibold text-secondary-foreground">
                       {index + 1}
                     </span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">
+                    <h3 className="font-semibold text-foreground mb-1 text-sm md:text-base">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -87,7 +87,7 @@ const PhilosophySection = () => {
           {/* Image */}
           <motion.div
             variants={itemVariants}
-            className="relative aspect-square lg:aspect-auto lg:h-full min-h-[400px] rounded-3xl overflow-hidden"
+            className="relative aspect-square lg:aspect-auto lg:h-full min-h-[300px] md:min-h-[400px] rounded-2xl md:rounded-3xl overflow-hidden"
           >
             <img
               src={teamImage}

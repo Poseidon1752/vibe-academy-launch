@@ -9,15 +9,15 @@ const ProcessSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} id="process" className="py-24 md:py-32 lg:py-40 bg-card">
+    <section ref={ref} id="process" className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card">
       <div className="container-wide section-padding">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="relative aspect-square rounded-3xl overflow-hidden order-2 lg:order-1"
+            className="relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden order-2 lg:order-1"
           >
             <img
               src={homeOfficeImage}
@@ -33,7 +33,7 @@ const ProcessSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="inline-block text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4"
+              className="inline-block text-xs sm:text-sm font-medium tracking-wide uppercase text-muted-foreground mb-3 md:mb-4"
             >
               {t.process.label}
             </motion.span>
@@ -42,35 +42,35 @@ const ProcessSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-12"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-8 md:mb-12"
             >
               {t.process.title}
             </motion.h2>
 
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               {t.process.steps.map((step, index) => (
                 <motion.div
                   key={step.number}
                   initial={{ opacity: 0, x: 40 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
-                  className="relative pl-20"
+                  className="relative pl-16 md:pl-20"
                 >
                   <div className="absolute left-0 top-0">
-                    <span className="text-5xl font-bold tracking-tighter text-accent">
+                    <span className="text-4xl md:text-5xl font-bold tracking-tighter text-accent">
                       {step.number}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                    <h3 className="text-lg md:text-xl font-semibold text-foreground mb-1 md:mb-2">
                       {step.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                       {step.description}
                     </p>
                   </div>
                   {index < t.process.steps.length - 1 && (
-                    <div className="absolute left-6 top-16 bottom-0 w-px bg-border h-8" />
+                    <div className="absolute left-5 md:left-6 top-14 md:top-16 bottom-0 w-px bg-border h-6 md:h-8" />
                   )}
                 </motion.div>
               ))}
