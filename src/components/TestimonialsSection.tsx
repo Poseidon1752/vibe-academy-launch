@@ -1,7 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import TiltCard from "./TiltCard";
 
 const TestimonialsSection = () => {
   const ref = useRef<HTMLElement>(null);
@@ -9,13 +10,6 @@ const TestimonialsSection = () => {
   const { t } = useLanguage();
   const [currentPage, setCurrentPage] = useState(0);
 
-  const itemsPerPage = {
-    mobile: 1,
-    tablet: 2,
-    desktop: 3,
-  };
-
-  // For mobile carousel
   const totalItems = t.testimonials.items.length;
 
   const nextPage = () => {
@@ -26,18 +20,51 @@ const TestimonialsSection = () => {
     setCurrentPage((prev) => (prev - 1 + totalItems) % totalItems);
   };
 
+  // Staggered animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 60, rotateX: -15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
   return (
-    <section ref={ref} id="testimonials" className="py-16 md:py-24 lg:py-32 xl:py-40 overflow-hidden">
-      <div className="container-wide section-padding">
+    <section ref={ref} id="testimonials" className="py-16 md:py-24 lg:py-32 xl:py-40 overflow-hidden relative">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
+      
+      <div className="container-wide section-padding relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-10 md:mb-16"
         >
-          <span className="inline-block text-xs sm:text-sm font-medium tracking-wide uppercase text-muted-foreground mb-3 md:mb-4">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium tracking-wide uppercase text-muted-foreground mb-3 md:mb-4"
+          >
+            <Quote className="w-4 h-4" />
             {t.testimonials.label}
-          </span>
+          </motion.span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-3 md:mb-4">
             {t.testimonials.title}
           </h2>
@@ -56,23 +83,20 @@ const TestimonialsSection = () => {
             className="glass-card flex flex-col mx-2"
           >
             <div className="flex-1 mb-6">
-              <svg
-                className="w-6 h-6 text-accent mb-3"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
+              <Quote className="w-6 h-6 text-accent mb-3" />
               <p className="text-foreground text-sm sm:text-base leading-relaxed">
                 "{t.testimonials.items[currentPage].quote}"
               </p>
             </div>
             <div className="flex items-center gap-3 pt-4 border-t border-border">
-              <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                <span className="text-xs font-semibold text-secondary-foreground">
+              <motion.div 
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+              >
+                <span className="text-xs font-semibold text-foreground">
                   {t.testimonials.items[currentPage].image}
                 </span>
-              </div>
+              </motion.div>
               <div>
                 <p className="font-semibold text-foreground text-sm">
                   {t.testimonials.items[currentPage].name}
@@ -86,73 +110,79 @@ const TestimonialsSection = () => {
 
           {/* Mobile Navigation */}
           <div className="flex items-center justify-center gap-4 mt-6">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={prevPage}
               className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
-            </button>
+            </motion.button>
             <div className="flex gap-2">
               {t.testimonials.items.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => setCurrentPage(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    currentPage === index ? "bg-foreground" : "bg-muted"
+                  whileHover={{ scale: 1.2 }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentPage === index ? "bg-foreground w-6" : "bg-muted"
                   }`}
                 />
               ))}
             </div>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={nextPage}
               className="p-2 rounded-full bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        {/* Tablet & Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 xl:gap-8">
+        {/* Desktop Grid with 3D Tilt */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 xl:gap-8"
+          style={{ perspective: "1000px" }}
+        >
           {t.testimonials.items.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="glass-card flex flex-col"
-            >
-              <div className="flex-1 mb-6">
-                <svg
-                  className="w-6 h-6 lg:w-8 lg:h-8 text-accent mb-3 lg:mb-4"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-                <p className="text-foreground text-sm lg:text-base leading-relaxed">
-                  "{testimonial.quote}"
-                </p>
-              </div>
-              <div className="flex items-center gap-3 lg:gap-4 pt-4 lg:pt-6 border-t border-border">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-secondary flex items-center justify-center">
-                  <span className="text-xs lg:text-sm font-semibold text-secondary-foreground">
-                    {testimonial.image}
-                  </span>
+            <motion.div key={testimonial.name} variants={cardVariants}>
+              <TiltCard className="h-full">
+                <div className="glass-card flex flex-col h-full group hover:border-primary/30 transition-colors duration-300">
+                  <div className="flex-1 mb-6">
+                    <Quote className="w-6 h-6 lg:w-8 lg:h-8 text-accent mb-3 lg:mb-4 group-hover:text-primary transition-colors" />
+                    <p className="text-foreground text-sm lg:text-base leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3 lg:gap-4 pt-4 lg:pt-6 border-t border-border">
+                    <motion.div 
+                      className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <span className="text-xs lg:text-sm font-semibold text-foreground">
+                        {testimonial.image}
+                      </span>
+                    </motion.div>
+                    <div>
+                      <p className="font-semibold text-foreground text-sm lg:text-base">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-xs lg:text-sm text-muted-foreground">
+                        {testimonial.role}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-foreground text-sm lg:text-base">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-xs lg:text-sm text-muted-foreground">
-                    {testimonial.role}
-                  </p>
-                </div>
-              </div>
+              </TiltCard>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
