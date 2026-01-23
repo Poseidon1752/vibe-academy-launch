@@ -5,19 +5,19 @@ const Footer = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="py-8 md:py-12 border-t border-border">
       <div className="container-wide section-padding">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <span className="text-lg font-semibold tracking-tight text-foreground">
+            <span className="text-base md:text-lg font-semibold tracking-tight text-foreground">
               Vibe Coding Academy
             </span>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">
               {t.footer.tagline}
             </p>
           </motion.div>
@@ -27,13 +27,13 @@ const Footer = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="flex items-center gap-8"
+            className="flex items-center gap-6 md:gap-8"
           >
             {t.footer.links.map((item) => (
               <motion.a
                 key={item}
                 href="#"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                className="text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                 whileHover={{ y: -1 }}
               >
                 {item}
@@ -46,7 +46,7 @@ const Footer = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-sm text-muted-foreground"
+            className="text-xs md:text-sm text-muted-foreground"
           >
             {t.footer.copyright}
           </motion.p>
