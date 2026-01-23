@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import teamImage from "@/assets/team-collab.jpg";
+import { CheckCircle2 } from "lucide-react";
 
 const PhilosophySection = () => {
   const ref = useRef<HTMLElement>(null);
@@ -13,7 +14,7 @@ const PhilosophySection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -31,9 +32,12 @@ const PhilosophySection = () => {
     <section
       ref={ref}
       id="philosophy"
-      className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card"
+      className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card relative overflow-hidden"
     >
-      <div className="container-wide section-padding">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-secondary/50 to-transparent" />
+      
+      <div className="container-wide section-padding relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -63,14 +67,22 @@ const PhilosophySection = () => {
               {t.philosophy.description}
             </motion.p>
 
-            <motion.div variants={itemVariants} className="space-y-4 md:space-y-6">
+            <motion.div variants={itemVariants} className="space-y-4 md:space-y-5">
               {t.philosophy.points.map((item, index) => (
-                <div key={index} className="flex gap-3 md:gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-secondary flex items-center justify-center">
-                    <span className="text-xs md:text-sm font-semibold text-secondary-foreground">
-                      {index + 1}
-                    </span>
-                  </div>
+                <motion.div 
+                  key={index} 
+                  className="flex gap-3 md:gap-4 group"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.4 + index * 0.15, duration: 0.6 }}
+                >
+                  <motion.div 
+                    className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                  </motion.div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1 text-sm md:text-base">
                       {item.title}
@@ -79,22 +91,41 @@ const PhilosophySection = () => {
                       {item.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
 
-          {/* Image */}
+          {/* Image with floating effect */}
           <motion.div
-            variants={itemVariants}
-            className="relative aspect-square lg:aspect-auto lg:h-full min-h-[300px] md:min-h-[400px] rounded-2xl md:rounded-3xl overflow-hidden"
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative"
           >
-            <img
-              src={teamImage}
-              alt="Team collaboration"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/10 to-transparent" />
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative aspect-square lg:aspect-auto lg:h-full min-h-[300px] md:min-h-[400px] rounded-2xl md:rounded-3xl overflow-hidden shadow-elevated"
+            >
+              <img
+                src={teamImage}
+                alt="Team collaboration"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
+            </motion.div>
+            
+            {/* Floating badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
+              className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-card border border-border rounded-2xl p-4 shadow-elevated"
+            >
+              <div className="text-2xl md:text-3xl font-bold text-foreground">100%</div>
+              <div className="text-xs md:text-sm text-muted-foreground">Free Education</div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
