@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="py-12 border-t border-border">
       <div className="container-wide section-padding">
@@ -15,7 +18,7 @@ const Footer = () => {
               Vibe Coding Academy
             </span>
             <p className="text-sm text-muted-foreground mt-1">
-              Building the next generation of developers.
+              {t.footer.tagline}
             </p>
           </motion.div>
 
@@ -26,7 +29,7 @@ const Footer = () => {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-8"
           >
-            {["Privacy", "Terms", "Contact"].map((item) => (
+            {t.footer.links.map((item) => (
               <motion.a
                 key={item}
                 href="#"
@@ -45,7 +48,7 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="text-sm text-muted-foreground"
           >
-            © 2025 Vibe Coding Academy
+            {t.footer.copyright}
           </motion.p>
         </div>
       </div>

@@ -1,9 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 import heroImage from "@/assets/hero-developer.jpg";
 
 const HeroSection = () => {
   const ref = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -47,7 +49,7 @@ const HeroSection = () => {
           className="mb-6"
         >
           <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-wide uppercase bg-secondary text-secondary-foreground rounded-full">
-            No Webinars. No Hidden Fees.
+            {t.hero.badge}
           </span>
         </motion.div>
 
@@ -57,9 +59,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-6 text-balance"
         >
-          Your Career in Tech Starts at{" "}
+          {t.hero.headline}{" "}
           <span className="relative inline-block">
-            $1,500/mo
+            {t.hero.salary}
             <motion.span
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -67,7 +69,7 @@ const HeroSection = () => {
               className="absolute bottom-2 left-0 right-0 h-3 bg-accent -z-10 origin-left"
             />
           </span>
-          . From Zero. For Free.
+          {t.hero.headlineEnd}
         </motion.h1>
 
         <motion.p
@@ -76,7 +78,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
         >
-          We train you, we hire you. Just pure vibe coding.
+          {t.hero.subheadline}
         </motion.p>
 
         <motion.div
@@ -92,7 +94,7 @@ const HeroSection = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            Apply for Interview with Curator
+            {t.hero.cta}
           </motion.button>
 
           <motion.button
@@ -105,7 +107,7 @@ const HeroSection = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            Learn More
+            {t.hero.learnMore}
           </motion.button>
         </motion.div>
 
