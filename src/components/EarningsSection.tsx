@@ -1,16 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
-const earningsData = [
-  { month: "Month 1", salary: "$1,500", role: "Junior Developer" },
-  { month: "Month 6", salary: "$2,500", role: "Developer" },
-  { month: "Year 1", salary: "$4,000", role: "Mid-Level Developer" },
-  { month: "Year 2+", salary: "$6,000+", role: "Senior Developer" },
-];
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const EarningsSection = () => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   return (
     <section ref={ref} id="earnings" className="py-24 md:py-32 lg:py-40">
@@ -22,18 +17,18 @@ const EarningsSection = () => {
           className="text-center mb-16"
         >
           <span className="inline-block text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4">
-            Your Growth Path
+            {t.earnings.label}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-4">
-            The Earnings
+            {t.earnings.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Transparent income progression from your first day on our team.
+            {t.earnings.description}
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {earningsData.map((item, index) => (
+          {t.earnings.data.map((item, index) => (
             <motion.div
               key={item.month}
               initial={{ opacity: 0, y: 40 }}
@@ -69,7 +64,7 @@ const EarningsSection = () => {
                       ? { width: `${25 + index * 25}%` }
                       : { width: 0 }
                   }
-                  transition={{ duration: 1, delay: 0.8 + index * 0.1, ease: "easeOut" }}
+                  transition={{ duration: 1, delay: 0.8 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 />
               </motion.div>
             </motion.div>
@@ -84,7 +79,7 @@ const EarningsSection = () => {
           className="mt-12 text-center"
         >
           <p className="text-sm text-muted-foreground">
-            *Salaries are based on full-time positions and may vary by location and performance.
+            {t.earnings.disclaimer}
           </p>
         </motion.div>
       </div>

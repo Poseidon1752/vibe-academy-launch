@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
+  const { t } = useLanguage();
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -10,7 +14,7 @@ const Navigation = () => {
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 left-0 right-0 z-50 glass"
     >
       <div className="container-wide section-padding">
@@ -24,29 +28,39 @@ const Navigation = () => {
             Vibe Coding Academy
           </motion.a>
 
-          <div className="hidden md:flex items-center gap-8">
-            {["Philosophy", "Earnings", "Process"].map((item) => (
+          <div className="hidden lg:flex items-center gap-8">
+            {[
+              { key: "philosophy", label: t.nav.philosophy },
+              { key: "earnings", label: t.nav.earnings },
+              { key: "process", label: t.nav.process },
+              { key: "testimonials", label: t.nav.testimonials },
+              { key: "faq", label: t.nav.faq },
+            ].map((item) => (
               <motion.button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase())}
+                key={item.key}
+                onClick={() => scrollToSection(item.key)}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
                 whileHover={{ y: -1 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                {item}
+                {item.label}
               </motion.button>
             ))}
           </div>
 
-          <motion.button
-            onClick={() => scrollToSection("apply")}
-            className="px-4 py-2 md:px-6 md:py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-elevated"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            Apply Now
-          </motion.button>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+
+            <motion.button
+              onClick={() => scrollToSection("apply")}
+              className="px-4 py-2 md:px-6 md:py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-elevated"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              {t.nav.applyNow}
+            </motion.button>
+          </div>
         </div>
       </div>
     </motion.nav>

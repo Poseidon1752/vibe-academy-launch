@@ -1,31 +1,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 import homeOfficeImage from "@/assets/home-office.jpg";
-
-const steps = [
-  {
-    number: "01",
-    title: "Learn",
-    description:
-      "Immerse yourself in our intensive curriculum. Master modern web technologies through hands-on projects and expert mentorship. No theory dumps—just practical skills.",
-  },
-  {
-    number: "02",
-    title: "Practice",
-    description:
-      "Work on real client projects alongside our team. Build your portfolio with production-grade applications while receiving continuous feedback.",
-  },
-  {
-    number: "03",
-    title: "Join the Team",
-    description:
-      "Graduate directly into a paid position on our dev team. Start earning from day one with a clear path to senior roles.",
-  },
-];
 
 const ProcessSection = () => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   return (
     <section ref={ref} id="process" className="py-24 md:py-32 lg:py-40 bg-card">
@@ -54,7 +35,7 @@ const ProcessSection = () => {
               transition={{ duration: 0.6 }}
               className="inline-block text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4"
             >
-              How It Works
+              {t.process.label}
             </motion.span>
 
             <motion.h2
@@ -63,11 +44,11 @@ const ProcessSection = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-12"
             >
-              Three Steps to Your New Career
+              {t.process.title}
             </motion.h2>
 
             <div className="space-y-8">
-              {steps.map((step, index) => (
+              {t.process.steps.map((step, index) => (
                 <motion.div
                   key={step.number}
                   initial={{ opacity: 0, x: 40 }}
@@ -88,7 +69,7 @@ const ProcessSection = () => {
                       {step.description}
                     </p>
                   </div>
-                  {index < steps.length - 1 && (
+                  {index < t.process.steps.length - 1 && (
                     <div className="absolute left-6 top-16 bottom-0 w-px bg-border h-8" />
                   )}
                 </motion.div>

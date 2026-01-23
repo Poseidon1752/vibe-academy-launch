@@ -1,10 +1,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 import teamImage from "@/assets/team-collab.jpg";
 
 const PhilosophySection = () => {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,42 +46,25 @@ const PhilosophySection = () => {
               variants={itemVariants}
               className="inline-block text-sm font-medium tracking-wide uppercase text-muted-foreground mb-4"
             >
-              Our Philosophy
+              {t.philosophy.label}
             </motion.span>
 
             <motion.h2
               variants={itemVariants}
               className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-foreground mb-6"
             >
-              The "No Bullshit" Approach
+              {t.philosophy.title}
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
               className="text-lg text-muted-foreground mb-8 leading-relaxed"
             >
-              We've stripped away everything that makes traditional bootcamps frustrating. 
-              No endless sales calls. No confusing payment plans. No vague promises.
+              {t.philosophy.description}
             </motion.p>
 
             <motion.div variants={itemVariants} className="space-y-6">
-              {[
-                {
-                  title: "100% Free Education",
-                  description:
-                    "We invest in you because we believe in your potential. No tuition, no income share agreements, no hidden catches.",
-                },
-                {
-                  title: "Direct Path to Employment",
-                  description:
-                    "Graduate directly into our internal dev team. We hire the developers we train.",
-                },
-                {
-                  title: "Real Projects, Real Skills",
-                  description:
-                    "Learn by building actual products for real clients. Your portfolio starts on day one.",
-                },
-              ].map((item, index) => (
+              {t.philosophy.points.map((item, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="flex-shrink-0 w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
                     <span className="text-sm font-semibold text-secondary-foreground">
