@@ -16,7 +16,7 @@ const TechMarquee = () => {
   };
 
   return (
-    <section className="py-8 md:py-12 border-y border-border bg-secondary/30 overflow-hidden">
+    <section className="py-8 md:py-12 border-y border-border bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 overflow-hidden">
       <div className="container-wide section-padding mb-4">
         <p className="text-xs md:text-sm font-medium text-muted-foreground uppercase tracking-wide text-center">
           {labels[language]}
@@ -44,7 +44,7 @@ const TechMarquee = () => {
                 key={index}
                 className="flex items-center gap-2 md:gap-3"
               >
-                <span className="w-2 h-2 rounded-full bg-primary/40" />
+                <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-accent" />
                 <span className="text-lg md:text-2xl font-semibold text-foreground/80 tracking-tight">
                   {tech}
                 </span>

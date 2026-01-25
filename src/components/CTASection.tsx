@@ -81,7 +81,7 @@ const CTASection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4"
           >
             <MagneticButton
-              className="w-full sm:w-auto group px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg font-medium bg-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.4)] flex items-center justify-center gap-3"
+              className="w-full sm:w-auto group px-8 sm:px-12 py-4 sm:py-5 text-base sm:text-lg font-medium bg-gradient-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-glow glow-primary flex items-center justify-center gap-3"
             >
               {t.cta.button}
               <motion.span
@@ -108,7 +108,7 @@ const CTASection = () => {
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.8 + index * 0.1 }}
               >
-                <CheckCircle2 className="w-4 h-4 text-green-600" />
+                <CheckCircle2 className="w-4 h-4 text-accent" />
                 {item}
               </motion.span>
             ))}

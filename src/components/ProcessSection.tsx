@@ -14,7 +14,8 @@ const ProcessSection = () => {
   return (
     <section ref={ref} id="process" className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-secondary/50 to-transparent" />
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-accent/5 to-transparent" />
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/2 bg-gradient-to-tl from-primary/5 to-transparent" />
       
       <div className="container-wide section-padding relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
@@ -43,10 +44,10 @@ const ProcessSection = () => {
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-              className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-card border border-border rounded-2xl p-4 shadow-elevated"
+              className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-gradient-accent text-accent-foreground rounded-2xl p-4 shadow-glow"
             >
-              <div className="text-2xl md:text-3xl font-bold text-foreground">3-6</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Months to Hired</div>
+              <div className="text-2xl md:text-3xl font-bold">3-6</div>
+              <div className="text-xs md:text-sm opacity-90">Months to Hired</div>
             </motion.div>
           </motion.div>
 
@@ -83,7 +84,7 @@ const ProcessSection = () => {
                   >
                     {/* Step indicator */}
                     <motion.div 
-                      className="absolute left-0 top-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300"
+                      className="absolute left-0 top-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     >

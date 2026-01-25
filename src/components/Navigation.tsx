@@ -62,7 +62,7 @@ const Navigation = () => {
               {/* Desktop Apply Button */}
               <motion.button
                 onClick={() => scrollToSection("apply")}
-                className="hidden sm:block px-4 py-2 md:px-6 md:py-2.5 text-sm font-medium bg-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-elevated"
+                className="hidden sm:block px-4 py-2 md:px-6 md:py-2.5 text-sm font-medium bg-gradient-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-glow"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -144,7 +144,7 @@ const Navigation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                     onClick={() => scrollToSection("apply")}
-                    className="w-full px-6 py-4 text-base font-medium bg-primary text-primary-foreground rounded-full"
+                    className="w-full px-6 py-4 text-base font-medium bg-gradient-primary text-primary-foreground rounded-full"
                   >
                     {t.nav.applyNow}
                   </motion.button>

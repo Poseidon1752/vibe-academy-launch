@@ -104,19 +104,19 @@ const HeroSection = () => {
             {t.hero.headline}{" "}
             <span className="relative inline-block">
               <motion.span
-                initial={{ backgroundSize: "0% 100%" }}
-                animate={{ backgroundSize: "100% 100%" }}
-                transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10"
-                style={{
-                  backgroundImage: "linear-gradient(120deg, hsl(var(--accent)) 0%, hsl(var(--accent)) 100%)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "0 88%",
-                  padding: "0 0.1em",
-                }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 text-gradient"
               >
                 {t.hero.salary}
               </motion.span>
+              <motion.span
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-accent rounded-full origin-left"
+              />
             </span>
             {t.hero.headlineEnd}
           </motion.h1>
@@ -136,7 +136,7 @@ const HeroSection = () => {
           >
             <MagneticButton
               onClick={scrollToApply}
-              className="w-full sm:w-auto group px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium bg-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-elevated flex items-center justify-center gap-2"
+              className="w-full sm:w-auto group px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium bg-gradient-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-glow glow-primary flex items-center justify-center gap-2"
             >
               {t.hero.cta}
               <motion.span

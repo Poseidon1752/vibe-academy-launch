@@ -33,8 +33,10 @@ const EarningsSection = () => {
 
   return (
     <section ref={ref} id="earnings" className="py-16 md:py-24 lg:py-32 xl:py-40 relative">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 via-transparent to-secondary/30" />
+      {/* Background gradient with more color */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+      <div className="absolute top-20 right-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       
       <div className="container-wide section-padding relative z-10">
         <motion.div
@@ -100,7 +102,7 @@ const EarningsSection = () => {
                       transition={{ delay: 1 + index * 0.1 }}
                       className="mt-3 text-xs text-muted-foreground"
                     >
-                      <span className="text-green-600 font-medium">
+                      <span className="text-accent font-medium">
                         +{Math.round((parseInt(item.salary.replace(/\D/g, '')) / 1500 - 1) * 100)}%
                       </span>
                       {" "}growth

@@ -32,10 +32,11 @@ const PhilosophySection = () => {
     <section
       ref={ref}
       id="philosophy"
-      className="py-16 md:py-24 lg:py-32 xl:py-40 bg-card relative overflow-hidden"
+      className="py-16 md:py-24 lg:py-32 xl:py-40 bg-background relative overflow-hidden"
     >
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-secondary/50 to-transparent" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-tr from-accent/5 to-transparent" />
       
       <div className="container-wide section-padding relative z-10">
         <motion.div
@@ -77,7 +78,7 @@ const PhilosophySection = () => {
                   transition={{ delay: 0.4 + index * 0.15, duration: 0.6 }}
                 >
                   <motion.div 
-                    className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-accent/20 transition-all duration-300"
+                    className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
@@ -121,10 +122,10 @@ const PhilosophySection = () => {
               initial={{ opacity: 0, scale: 0 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-              className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-card border border-border rounded-2xl p-4 shadow-elevated"
+              className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-gradient-primary text-primary-foreground rounded-2xl p-4 shadow-glow"
             >
-              <div className="text-2xl md:text-3xl font-bold text-foreground">100%</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Free Education</div>
+              <div className="text-2xl md:text-3xl font-bold">100%</div>
+              <div className="text-xs md:text-sm opacity-90">Free Education</div>
             </motion.div>
           </motion.div>
         </motion.div>
