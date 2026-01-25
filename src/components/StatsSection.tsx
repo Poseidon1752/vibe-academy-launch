@@ -97,9 +97,9 @@ const StatsSection = () => {
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-secondary mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300"
+                  className="inline-flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/15 mb-4 group-hover:from-primary group-hover:to-primary group-hover:text-primary-foreground transition-all duration-300"
                 >
-                  <Icon className="w-5 h-5 md:w-6 md:h-6" />
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
                 </motion.div>
                 
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter text-foreground mb-2">

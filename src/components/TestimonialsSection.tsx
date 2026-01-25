@@ -45,9 +45,11 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section ref={ref} id="testimonials" className="py-16 md:py-24 lg:py-32 xl:py-40 overflow-hidden relative">
+    <section ref={ref} id="testimonials" className="py-16 md:py-24 lg:py-32 xl:py-40 overflow-hidden relative bg-card">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
+      <div className="absolute top-40 left-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-40 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
       
       <div className="container-wide section-padding relative z-10">
         <motion.div
