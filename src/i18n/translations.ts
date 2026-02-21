@@ -14,11 +14,11 @@ export const translations = {
     // Hero
     hero: {
       badge: "No Webinars. No Hidden Fees.",
-      headline: "Your Career in Tech Starts at",
-      salary: "$1,500/mo",
-      headlineEnd: " From Zero. For Free.",
-      subheadline: "We train you, we hire you. Just pure vibe coding.",
-      cta: "Apply for Interview with Curator",
+      headline: "Start Earning",
+      salary: "$1,500+/mo",
+      headlineEnd: " in Tech. Free Training. Zero Experience Needed.",
+      subheadline: "We train you for free, hire you into our team, and you start earning from day one.",
+      cta: "Apply for Interview",
       learnMore: "Learn More",
     },
     // Philosophy
@@ -164,7 +164,7 @@ export const translations = {
       label: "Ready to Start?",
       title: "Talk to a Curator",
       description:
-        "Schedule a 15-minute call with our team. No pressure, no sales pitch—just an honest conversation about your goals.",
+        "Apply for a short interview with our team. No pressure, no sales pitch—just an honest conversation about your goals.",
       button: "Apply for Interview",
       trust: ["Free to apply", "No commitment", "Response within 24h"],
     },
@@ -188,10 +188,10 @@ export const translations = {
     // Hero
     hero: {
       badge: "Без вебінарів. Без прихованих платежів.",
-      headline: "Твоя кар'єра в IT починається з",
-      salary: "$1,500/міс",
-      headlineEnd: " З нуля. Безкоштовно.",
-      subheadline: "Ми навчаємо тебе, ми наймаємо тебе. Просто чистий вайб кодинг.",
+      headline: "Почни заробляти",
+      salary: "$1,500+/міс",
+      headlineEnd: " в IT. Навчання безкоштовне. Досвід не потрібен.",
+      subheadline: "Ми навчаємо тебе безкоштовно, беремо в команду, і ти починаєш заробляти з першого дня.",
       cta: "Подати заявку на співбесіду",
       learnMore: "Дізнатися більше",
     },
@@ -338,7 +338,7 @@ export const translations = {
       label: "Готовий почати?",
       title: "Поговори з куратором",
       description:
-        "Заплануй 15-хвилинний дзвінок з нашою командою. Без тиску, без продажів — просто чесна розмова про твої цілі.",
+        "Подай заявку на коротку співбесіду з нашою командою. Без тиску, без продажів — просто чесна розмова про твої цілі.",
       button: "Подати заявку",
       trust: ["Безкоштовна заявка", "Без зобов'язань", "Відповідь протягом 24 год"],
     },
@@ -362,10 +362,10 @@ export const translations = {
     // Hero
     hero: {
       badge: "Без вебинаров. Без скрытых платежей.",
-      headline: "Твоя карьера в IT начинается с",
-      salary: "$1,500/мес",
-      headlineEnd: " С нуля. Бесплатно.",
-      subheadline: "Мы обучаем тебя, мы нанимаем тебя. Просто чистый вайб кодинг.",
+      headline: "Начни зарабатывать",
+      salary: "$1,500+/мес",
+      headlineEnd: " в IT. Обучение бесплатное. Опыт не нужен.",
+      subheadline: "Мы обучаем тебя бесплатно, берём в команду, и ты начинаешь зарабатывать с первого дня.",
       cta: "Подать заявку на собеседование",
       learnMore: "Узнать больше",
     },
@@ -512,7 +512,7 @@ export const translations = {
       label: "Готов начать?",
       title: "Поговори с куратором",
       description:
-        "Запланируй 15-минутный звонок с нашей командой. Без давления, без продаж — просто честный разговор о твоих целях.",
+        "Подай заявку на короткое собеседование с нашей командой. Без давления, без продаж — просто честный разговор о твоих целях.",
       button: "Подать заявку",
       trust: ["Бесплатная заявка", "Без обязательств", "Ответ в течение 24 ч"],
     },
