@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -29,16 +30,19 @@ const Footer = () => {
             transition={{ delay: 0.1 }}
             className="flex items-center gap-6 md:gap-8"
           >
-            {t.footer.links.map((item) => (
-              <motion.a
-                key={item}
-                href="#"
-                className="text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-                whileHover={{ y: -1 }}
-              >
-                {item}
-              </motion.a>
-            ))}
+            {t.footer.links.map((item, index) => {
+              const paths = ["/privacy", "/terms", "/contact"];
+              return (
+                <motion.div key={item} whileHover={{ y: -1 }}>
+                  <Link
+                    to={paths[index]}
+                    className="text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  >
+                    {item}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </motion.div>
 
           <motion.p
