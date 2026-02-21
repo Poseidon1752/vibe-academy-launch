@@ -19,8 +19,7 @@ const HeroSection = () => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const scrollToApply = () => {
-    const element = document.getElementById("apply");
-    element?.scrollIntoView({ behavior: "smooth" });
+    window.open("https://t.me/smc_tg911", "_blank");
   };
 
   // Text animation variants
