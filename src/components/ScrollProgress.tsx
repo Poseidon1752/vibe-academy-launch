@@ -1,12 +1,17 @@
 import { motion, useScroll, useSpring } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
+  const isMobile = useIsMobile();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
+
+  // Skip rendering on mobile to avoid scroll-linked animation overhead
+  if (isMobile) return null;
 
   return (
     <motion.div

@@ -16,43 +16,52 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Disable expensive parallax transforms on mobile
+  // Completely disable scroll-linked transforms on mobile
   const y = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], isMobile ? [1, 1] : [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], isMobile ? [1, 1] : [1, 1.1]);
 
   const scrollToApply = () => {
     window.open("https://t.me/smc_tg911", "_blank");
   };
 
-  // Text animation variants
+  // Simpler animations on mobile - no blur filter, no stagger
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
+        staggerChildren: isMobile ? 0 : 0.1,
+        delayChildren: isMobile ? 0 : 0.3,
       },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-    },
-  };
+  const itemVariants = isMobile
+    ? {
+        hidden: { opacity: 0, y: 15 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.4, ease: "easeOut" as const },
+        },
+      }
+    : {
+        hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+        visible: {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+        },
+      };
 
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
     >
-      {/* Background Image with Parallax (disabled on mobile) */}
+      {/* Background Image - static on mobile, parallax on desktop */}
       {isMobile ? (
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
@@ -80,17 +89,18 @@ const HeroSection = () => {
       {/* Floating Orbs */}
       <FloatingOrbs />
 
-      {/* Grain overlay for premium feel */}
-      <div 
-        className="absolute inset-0 z-10 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Grain overlay - disabled on mobile for performance */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 z-10 opacity-[0.015] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+      )}
 
       {/* Content */}
-      <motion.div
-        style={{ opacity }}
+      <div
         className="relative z-20 container-tight section-padding text-center py-12 md:py-0"
       >
         <motion.div
@@ -100,14 +110,12 @@ const HeroSection = () => {
         >
           {/* Badge */}
           <motion.div variants={itemVariants} className="mb-4 md:mb-6">
-            <motion.span 
-              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-medium tracking-wide uppercase bg-secondary/80 backdrop-blur-sm text-secondary-foreground rounded-full border border-border/50"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            <span 
+              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-medium tracking-wide uppercase bg-secondary/80 text-secondary-foreground rounded-full border border-border/50"
             >
               <Sparkles className="w-3 h-3" />
               {t.hero.badge}
-            </motion.span>
+            </span>
           </motion.div>
 
           {/* Headline */}
@@ -153,13 +161,17 @@ const HeroSection = () => {
               className="w-full sm:w-auto group px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium bg-gradient-primary text-primary-foreground rounded-full transition-all duration-300 hover:shadow-glow glow-primary flex items-center justify-center gap-2"
             >
               {t.hero.cta}
-              <motion.span
-                initial={{ x: 0 }}
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ArrowRight className="w-4 h-4" />
-              </motion.span>
+              {isMobile ? (
+                <span><ArrowRight className="w-4 h-4" /></span>
+              ) : (
+                <motion.span
+                  initial={{ x: 0 }}
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.span>
+              )}
             </MagneticButton>
 
             <MagneticButton
@@ -167,7 +179,7 @@ const HeroSection = () => {
                 const element = document.getElementById("philosophy");
                 element?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium text-foreground bg-background/50 backdrop-blur-sm border border-border rounded-full transition-all duration-300 hover:bg-secondary"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base font-medium text-foreground bg-background/80 md:bg-background/50 md:backdrop-blur-sm border border-border rounded-full transition-all duration-300 hover:bg-secondary"
             >
               {t.hero.learnMore}
             </MagneticButton>
@@ -220,7 +232,7 @@ const HeroSection = () => {
             />
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };

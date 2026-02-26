@@ -142,9 +142,16 @@
 
 @layer components {
   .glass {
-    @apply backdrop-blur-xl border;
+    @apply border;
     background: hsl(var(--glass-bg));
     border-color: hsl(var(--glass-border));
+  }
+
+  /* Only apply backdrop-blur on non-mobile for performance */
+  @media (min-width: 768px) {
+    .glass {
+      @apply backdrop-blur-xl;
+    }
   }
 
   .glass-card {
