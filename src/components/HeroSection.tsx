@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import heroImage from "@/assets/hero-developer.jpg";
 import FloatingOrbs from "./FloatingOrbs";
 import MagneticButton from "./MagneticButton";
@@ -9,14 +10,16 @@ import { ArrowRight, Sparkles } from "lucide-react";
 const HeroSection = () => {
   const ref = useRef<HTMLElement>(null);
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  // Disable expensive parallax transforms on mobile
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? ["0%", "0%"] : ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], isMobile ? [1, 1] : [1, 1.1]);
 
   const scrollToApply = () => {
     window.open("https://t.me/smc_tg911", "_blank");
@@ -49,18 +52,30 @@ const HeroSection = () => {
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
     >
-      {/* Background Image with Parallax */}
-      <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0 z-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
-        <img
-          src={heroImage}
-          alt="Developer working"
-          className="w-full h-full object-cover object-center"
-        />
-      </motion.div>
+      {/* Background Image with Parallax (disabled on mobile) */}
+      {isMobile ? (
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
+          <img
+            src={heroImage}
+            alt="Developer working"
+            className="w-full h-full object-cover object-center"
+            loading="eager"
+          />
+        </div>
+      ) : (
+        <motion.div
+          style={{ y, scale }}
+          className="absolute inset-0 z-0"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background z-10" />
+          <img
+            src={heroImage}
+            alt="Developer working"
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
+      )}
 
       {/* Floating Orbs */}
       <FloatingOrbs />
