@@ -1,6 +1,25 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const FloatingOrbs = () => {
+  const isMobile = useIsMobile();
+
+  // On mobile, render simple static gradient blobs instead of animated ones
+  if (isMobile) {
+    return (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute -top-40 -right-40 w-[400px] h-[400px] rounded-full opacity-30"
+          style={{ background: "radial-gradient(circle, hsl(245 85% 65% / 0.3) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute -bottom-20 -left-20 w-[300px] h-[300px] rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, hsl(160 85% 45% / 0.3) 0%, transparent 70%)" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Large gradient orb - top right - Vibrant purple/indigo */}
